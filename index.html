@@ -6,7 +6,10 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="nb_of_wins_box">Parties gagnées: <span id="nb_of_wins"></span></div>
+<div id="top_left">
+    <div>Parties gagnées: <span id="nb_of_wins"></span></div>
+    <div>Temps: <span id="timer"></span></div>
+</div>
 
 <main>
 <div id="question_box"></div>
@@ -15,6 +18,7 @@
     <div id="guess_box"></div>
     <div id="start_over">
         <h1>BRAVO!! <br>Vous avez gagné!!!</h1>
+        <div><h4>Vous avez mis <span id="time"></span> secondes</h4></div>
         <a href="#" onclick="start_over()">recommencer</a>
     </div>
 </div>

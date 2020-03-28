@@ -50,7 +50,7 @@ a:visited{
     top: 50%;                        
     transform: translate(-50%, -50%); 
 }
-#nb_of_wins_box{
+#top_left{
     position: absolute;
 }
 #question_box {

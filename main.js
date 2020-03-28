@@ -32,6 +32,8 @@ var random_number = 0;
 var the_question = "";
 var the_answer = "";
 var the_image= "";
+var start;
+var time = 0;
 
 function display_question(){
     document.getElementById("question_box").innerHTML = the_question;
@@ -65,14 +67,16 @@ function initialize() {
     the_image = images[random_number];
     display_question();
     display_wins();
+    $("#timer").innerHTML = time;
     document.getElementById("infos").style.display = "block";
     fade_image();
   };
 
 function start_over() {
+    start = new Date;
     nb_of_wins = 0;
     picked = new Array(nb_of_questions).fill(false);
-    document.getElementById("nb_of_wins_box").style.display = "block";
+    document.getElementById("top_left").style.display = "block";
     document.getElementById("question_box").style.display = "block";
     document.getElementById("guess_box").style.display = "block";
     document.getElementById("image_box").style.display = "block";
@@ -89,9 +93,10 @@ function win_question(){
     if (nb_of_wins < WINS_MAX){ //not done yet
         document.getElementById("next").style.display = "block";
     } else { //end game
+        $('#time').text(time);
         document.getElementById("question_box").style.display = "none";
         document.getElementById("image_box").style.display = "none";
-        document.getElementById("nb_of_wins_box").style.display = "none";
+        document.getElementById("top_left").style.display = "none";
         document.getElementById("guess_box").style.display = "none";
         document.getElementById("start_over").style.display = "block"; 
     };
@@ -100,6 +105,12 @@ function win_question(){
 
 
 start_over();
+
+
+setInterval(function() {
+    time = Math.floor((new Date - start) / 1000)
+    $('#timer').text(time);
+}, 1000);
 
 //get and display guess
 $(document).keydown(function(event){ //get guess
