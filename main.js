@@ -1,6 +1,6 @@
 
 var WINS_MAX = 3;
-var FADE_TIME = 1;
+var FADE_TIME = 10;
 var WILDCARD = "PENIS";
 
 var questions = [
