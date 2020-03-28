@@ -1,10 +1,11 @@
 
 var WINS_MAX = 3;
+var FADE_TIME = 15;
 
 var questions = [
-    "qui a fait 9c",
-    "qui fait du deep water solo",
-    "qui grimpe sans corde"];
+    "Qui a fait 9c",
+    "Qui fait du deep water solo lorem qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo",
+    "Qui grimpe sans corde"];
 
 var nb_of_questions = questions.length
 
@@ -30,27 +31,33 @@ function display_question(){
     document.getElementById("image_box").innerHTML = "<img src=img/" + the_answer + ".jpg>";
 };
 
+function display_wins(){
+    document.getElementById("nb_of_wins").innerHTML = nb_of_wins + "/" + WINS_MAX;
+};
+
 function fade_image() {
     document.getElementById("image_box").style.opacity = 0;
-    $( "#image_box" ).animate({opacity: 1}, 10000,);
+    $( "#image_box" ).animate({opacity: 1}, FADE_TIME * 1000,);
   };
 
 function initialize() {
     //reset CSS
-    document.getElementById("guess_box").style.backgroundColor = "inherit";
-    document.getElementById("next").style.display = "none";
-    document.getElementById("start_over").style.display = "none";
-    document.getElementById("nb_of_wins").innerHTML = nb_of_wins;
-    //pick unpicked random question 
+    guess = ""; //reset guess
+    document.getElementById("guess_box").innerHTML = ""; //reset guess
+    document.getElementById("guess_box").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
+    document.getElementById("next").style.display = "none"; //hide next
+    document.getElementById("start_over").style.display = "none"; //hide start_over
+    
+    //chose unpicked random question 
     random_number = Math.floor( Math.random() * nb_of_questions);
     while (picked[random_number]){
         random_number = Math.floor( Math.random() * nb_of_questions);
     }
     the_question = questions[random_number];
     the_answer = answers[random_number];
-    guess = "";
-    document.getElementById("guess_box").innerHTML = guess;
     display_question();
+    display_wins();
+    document.getElementById("infos").style.display = "block";
     fade_image();
   };
 
@@ -65,20 +72,20 @@ function start_over() {
 };
 
 function win_question(){
-    $("#image_box").stop();
-    document.getElementById("image_box").style.opacity = 1;
-    document.getElementById("guess_box").style.backgroundColor = "green"; //set CSS
+    $("#image_box").stop(); //stop animation
+    document.getElementById("image_box").style.opacity = 1; //reveal image
+    document.getElementById("guess_box").style.backgroundColor = "chartreuse"; //set CSS
     picked[random_number] = true; //mark question as picked
     nb_of_wins ++; //inscrease nb_of_wins
-    document.getElementById("nb_of_wins").innerHTML = nb_of_wins; //display nb_of_wins
-    if (nb_of_wins < WINS_MAX){
-        document.getElementById("next").style.display = "block"; //no done yet
-    } else {
+    display_wins();
+    if (nb_of_wins < WINS_MAX){ //not done yet
+        document.getElementById("next").style.display = "block";
+    } else { //end game
         document.getElementById("question_box").style.display = "none";
         document.getElementById("image_box").style.display = "none";
         document.getElementById("nb_of_wins_box").style.display = "none";
         document.getElementById("guess_box").style.display = "none";
-        document.getElementById("start_over").style.display = "block"; //end game
+        document.getElementById("start_over").style.display = "block"; 
     };
 };
 
@@ -90,13 +97,12 @@ start_over();
 $(document).keydown(function(event){ //get guess
     var letter_pressed = String.fromCharCode(event.which); //get letter
     var key_pressed = event.which; //get key
-
     if (guess != the_answer){ //if not right answer yet
-
         if (key_pressed == 8 && guess.length > 0){ //if backspace
             guess = guess.slice(0, -1); //remove last letter
         } else if (guess.length < the_answer.length && key_pressed > 64 && key_pressed < 91){  //if key is letter
             guess += letter_pressed; //add letter to guess
+            document.getElementById("infos").style.display = "none"; //hide info
         };
 
         document.getElementById("guess_box").innerHTML = guess; //display guess

@@ -3,36 +3,29 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Questions</title>
-<style>
-    body{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    img{
-
-        width: 400px;
-    }
-    #guess_box{ width: 200px;}
-    #next{ width: 200px; border-style: solid; border-color: black;}
-    #start_over{ width: 200px; border-style: solid; border-color: black;}
-    #nb_of_wins_box{ position: absolute; top: 0}
-
-</style>
+<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div id="nb_of_wins_box">Nombre de parties gagnées: <span id="nb_of_wins"></span></div>
+<div id="nb_of_wins_box">Parties gagnées: <span id="nb_of_wins"></span></div>
+
+<main>
 <div id="question_box"></div>
-<div id="image_box"></div>
-<div id="guess_box"></div>
-<div id="next"><a href="#" onclick="initialize()">Appuyez sur "entrer"</a></div>
-<div id="start_over">
-    <h1>Vous avez gagné!!!</h1>
-    <a href="#" onclick="start_over()">recommencer</a>
+<div id="main_window">
+    <div id="image_box"></div>
+    <div id="guess_box"></div>
+    <div id="start_over">
+        <h1>BRAVO!! Vous avez gagné!!!</h1>
+        <a href="#" onclick="start_over()">recommencer</a>
+    </div>
 </div>
 
+</main>
+<footer>
+    <center>
+        <div id="next"><a href="#" onclick="initialize()">Appuyez sur "entrer"</a></div>
+        <div id="infos">Ecris quelque chose!</div>
+    </center>
+</footer>
 <script src="main.js"></script>
 </body>
 </html>

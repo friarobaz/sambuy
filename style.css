@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Sen:400,700,800&display=swap');
+
+body{
+
+    font-family: 'Sen', sans-serif;
+}
+
+img{
+    max-height: 80vh;
+    max-width: 80vw;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+}
+
+#guess_box{ 
+    font-size: 5rem;
+    position: absolute;  
+    left: 50%;                        
+    top: 50%;                        
+    transform: translate(-50%, -50%);
+    }
+#main_window{ 
+    flex: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: 800px;
+    
+    }
+
+#start_over{
+    position: absolute;  
+    left: 50%;                        
+    top: 50%;                        
+    transform: translate(-50%, -50%); 
+}
+#nb_of_wins_box{
+    position: absolute;
+}
+#question_box {
+    font-size: 1.2rem;
+    flex: 1;
+    max-width: 900px;
+    padding-top: 10px;
+}
+
+#infos {
+    
+    padding-top: 10px;
+}
