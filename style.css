@@ -19,6 +19,14 @@ main{
     position: relative;
 }
 
+a{
+    color: black;
+}
+
+a:visited{
+    color: black;
+}
+
 #guess_box{ 
     font-size: 3rem;
     position: absolute;  

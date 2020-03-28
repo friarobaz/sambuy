@@ -1,6 +1,7 @@
 
 var WINS_MAX = 3;
 var FADE_TIME = 1;
+var WILDCARD = "PENIS";
 
 var questions = [
     "Qui a fait 9c",
@@ -104,7 +105,7 @@ start_over();
 $(document).keydown(function(event){ //get guess
     var letter_pressed = String.fromCharCode(event.which); //get letter
     var key_pressed = event.which; //get key
-    if (guess != the_answer){ //if not right answer yet
+    if (guess != the_answer && guess != WILDCARD){ //if not right answer yet
         if (key_pressed == 8 && guess.length > 0){ //if backspace
             guess = guess.slice(0, -1); //remove last letter
         } else if (guess.length < the_answer.length && ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32)){  //if key is letter
@@ -113,56 +114,12 @@ $(document).keydown(function(event){ //get guess
         };
 
         document.getElementById("guess_box").innerHTML = guess; //display guess
-        if (guess == the_answer){
+
+        if (guess == the_answer || guess == WILDCARD){
             win_question();
         };
-    }else if (key_pressed == 13 && nb_of_wins < WINS_MAX){
+    }else if (key_pressed == 13 && nb_of_wins < WINS_MAX){ //next question on "enter"
         initialize();
     };
     
 }); //end get guess
-
-
-
-
-
-/*
-let myVariable = 'Bob';
-
-let iceCream = 'chocolat';
-
-if (iceCream === 'chocolat') {
-  alert("J'adore la glace au chocolat !");    
-} else {
-  alert("Ooooh, mais j'aurais préféré au chocolat.");    
-}
-
-function multiply(num1,num2) {
-    let result = num1 * num2;
-    return result;
-  }
-
-  document.querySelector('html').addEventListener('click', function() {
-    alert('Aïe, arrêtez de cliquer !!');
-});
-
-document.getElementById("demo").innerHTML = cars[0];
-
-for (i = 0; i < fLen; i++) {
-  text += "<li>" + fruits[i] + "</li>";
-}
-
-fruits.forEach(myFunction);
-
-fruits.push("Lemon");
-
-fruits.length;
-
-var pos = fruits.indexOf('Banana');
-
-vegetables.splice(pos, n); 
-// n définit le nombre d'éléments à supprimer,
-// à partir de la position pos
-
-*/
-
