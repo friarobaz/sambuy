@@ -4,9 +4,9 @@ var FADE_TIME = 10;
 var WILDCARD = "PENIS";
 
 var questions = [
-    "Qui a fait 9c",
-    "Qui fait du deep water solo",
-    "Qui grimpe sans corde"];
+    "Qui a fait 9c?",
+    "Qui fait du deep water solo?",
+    "Qui grimpe sans corde?"];
 
 var nb_of_questions = questions.length
 
