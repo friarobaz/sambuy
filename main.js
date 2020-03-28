@@ -1,18 +1,23 @@
 
 var WINS_MAX = 3;
-var FADE_TIME = 15;
+var FADE_TIME = 1;
 
 var questions = [
     "Qui a fait 9c",
-    "Qui fait du deep water solo lorem qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo qui fait du deep water solo",
+    "Qui fait du deep water solo",
     "Qui grimpe sans corde"];
 
 var nb_of_questions = questions.length
 
 var answers = [
-    "ONDRA",
-    "SHARMA",
-    "HONNOLD"];
+    "ADAM ONDRA",
+    "CHRIS SHARMA",
+    "ALEX HONNOLD"];
+
+var images = [
+    "ondra.jpg",
+    "sharma.jpg",
+    "honnold.jpg"];
 
 var categories = [  //not used yet
     "people",
@@ -25,10 +30,11 @@ var nb_of_wins = 0;
 var random_number = 0;
 var the_question = "";
 var the_answer = "";
+var the_image= "";
 
 function display_question(){
     document.getElementById("question_box").innerHTML = the_question;
-    document.getElementById("image_box").innerHTML = "<img src=img/" + the_answer + ".jpg>";
+    document.getElementById("image_box").innerHTML = "<img src=img/" + the_image + ">";
 };
 
 function display_wins(){
@@ -55,6 +61,7 @@ function initialize() {
     }
     the_question = questions[random_number];
     the_answer = answers[random_number];
+    the_image = images[random_number];
     display_question();
     display_wins();
     document.getElementById("infos").style.display = "block";
@@ -100,7 +107,7 @@ $(document).keydown(function(event){ //get guess
     if (guess != the_answer){ //if not right answer yet
         if (key_pressed == 8 && guess.length > 0){ //if backspace
             guess = guess.slice(0, -1); //remove last letter
-        } else if (guess.length < the_answer.length && key_pressed > 64 && key_pressed < 91){  //if key is letter
+        } else if (guess.length < the_answer.length && ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32)){  //if key is letter
             guess += letter_pressed; //add letter to guess
             document.getElementById("infos").style.display = "none"; //hide info
         };
