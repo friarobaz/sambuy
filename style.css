@@ -25,7 +25,6 @@ main{
     left: 50%;                        
     top: 50%;                        
     transform: translate(-50%, -50%);
-    
     }
 #main_window{ 
     flex: 10;
@@ -34,6 +33,7 @@ main{
     align-items: center;
     position: relative;
     min-width: 800px;
+    
     }
 
 #start_over{
@@ -53,9 +53,6 @@ main{
 }
 
 #infos {
+    
     padding-top: 10px;
-}
-
-footer {
-
 }

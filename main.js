@@ -63,10 +63,8 @@ function initialize() {
 
 function start_over() {
     nb_of_wins = 0;
-    picked = new Array(nb_of_questions).fill(false); //reset picked
-    //show everything
+    picked = new Array(nb_of_questions).fill(false);
     document.getElementById("nb_of_wins_box").style.display = "block";
-    document.getElementById("footer").style.display = "block";
     document.getElementById("question_box").style.display = "block";
     document.getElementById("guess_box").style.display = "block";
     document.getElementById("image_box").style.display = "block";
@@ -90,6 +88,8 @@ function win_question(){
         document.getElementById("start_over").style.display = "block"; 
     };
 };
+
+
 
 start_over();
 
