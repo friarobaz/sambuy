@@ -1,7 +1,7 @@
 
 var WINS_MAX = 3;
 var FADE_TIME = 10;
-var WILDCARD = "PENIS";
+var WILDCARD = "LOL";
 
 var questions = [
     "Qui a fait 9c?",
@@ -36,12 +36,12 @@ var start;
 var time = 0;
 
 function display_question(){
-    document.getElementById("question_box").innerHTML = the_question;
+    $('#question_box').text(the_question);
     document.getElementById("image_box").innerHTML = "<img src=img/" + the_image + ">";
 };
 
 function display_wins(){
-    document.getElementById("nb_of_wins").innerHTML = nb_of_wins + "/" + WINS_MAX;
+    $('#nb_of_wins').text(nb_of_wins + "/" + WINS_MAX);
 };
 
 function fade_image() {
@@ -55,7 +55,7 @@ function initialize() {
     document.getElementById("guess_box").innerHTML = ""; //reset guess
     document.getElementById("guess_box").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
     document.getElementById("next").style.display = "none"; //hide next
-    document.getElementById("start_over").style.display = "none"; //hide start_over
+    document.getElementById("bravo").style.display = "none"; //hide bravo
     
     //chose unpicked random question 
     random_number = Math.floor( Math.random() * nb_of_questions);
@@ -91,14 +91,14 @@ function win_question(){
     nb_of_wins ++; //inscrease nb_of_wins
     display_wins();
     if (nb_of_wins < WINS_MAX){ //not done yet
-        document.getElementById("next").style.display = "block";
+        $('#next').show();
     } else { //end game
         $('#time').text(time);
-        document.getElementById("question_box").style.display = "none";
-        document.getElementById("image_box").style.display = "none";
-        document.getElementById("top_left").style.display = "none";
-        document.getElementById("guess_box").style.display = "none";
-        document.getElementById("start_over").style.display = "block"; 
+        $('#question_box').hide();
+        $('#image_box').hide();
+        $('#top_left').hide();
+        $('#guess_box').hide();
+        $('#bravo').show();
     };
 };
 
