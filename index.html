@@ -30,11 +30,11 @@
 </div>
 
 <div id="game">
-    <div id="top_left">
-        <div>Parties gagnées: <span id="nb_of_wins"></span></div>
-        <div>Temps: <span id="timer"></span></div>
-    </div>
     <main>
+        <div id="top_left">
+            <div>Parties gagnées: <span id="nb_of_wins">0</span></div>
+            <div>Temps: <span id="timer"></span></div>
+        </div>
         <div id="question_box">
             <div id="question"></div>
         </div>
@@ -44,7 +44,7 @@
             <div id="bravo">
                 <h1>BRAVO!! <br>Vous avez gagné!!!</h1>
                 <div><h4>Vous avez mis <span id="time"></span> secondes</h4></div>
-                <span onclick="start_over()" style="text-decoration: underline; cursor: pointer;">recommencer</span>
+                <span onclick="reset_game()" style="text-decoration: underline; cursor: pointer;">recommencer</span>
             </div>
         </div>
         <footer>

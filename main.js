@@ -34,17 +34,11 @@ var the_answer = "";
 var the_image= "";
 var start;
 var time = 0;
+var chosen_caterogy = "people";
 
 function clear(){ //hide everything
-    
     $('#start').hide();
     $('#game').hide();
-    //$('#top_left').hide();
-    //$('#question').hide();
-    //$('#image').hide();
-    //$('#guess').hide();
-    //$('#bravo').hide();
-    //$('footer').hide();
 };
 
 function display_question(){
@@ -57,43 +51,41 @@ function display_wins(){
 };
 
 function fade_image() {
-    document.getElementById("image").style.opacity = 0;
-    $( "#image" ).animate({opacity: 1}, FADE_TIME * 1000,);
+    $( "#image" ).fadeTo(0, 0);
+    $( "#image" ).fadeTo(FADE_TIME * 1000, 1);
   };
 
-function initialize() {
-    //reset CSS
-    guess = ""; //reset guess
-    document.getElementById("guess").innerHTML = ""; //reset guess
-    document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
-    document.getElementById("next").style.display = "none"; //hide next
-    document.getElementById("bravo").style.display = "none"; //hide bravo
-    
-    //chose unpicked random question 
-    random_number = Math.floor( Math.random() * nb_of_questions);
-    while (picked[random_number]){
-        random_number = Math.floor( Math.random() * nb_of_questions);
-    }
+function pick_question(chosen_caterogy){
+    random_number = Math.floor( Math.random() * nb_of_questions); //pick random number
+    while (picked[random_number] || categories[random_number] != chosen_caterogy){ ; //check if unpicked and right category
+        random_number = Math.floor( Math.random() * nb_of_questions) //reroll
+    } //end while
     the_question = questions[random_number];
     the_answer = answers[random_number];
     the_image = images[random_number];
-    display_question();
-    display_wins();
-    $("#timer").innerHTML = time;
-    document.getElementById("infos").style.display = "block";
-    fade_image();
-  };
+};
 
-function start_over() {
+function reset_game() {
     start = new Date;
     nb_of_wins = 0;
     picked = new Array(nb_of_questions).fill(false);
-    document.getElementById("top_left").style.display = "block";
-    document.getElementById("question").style.display = "block";
-    document.getElementById("guess").style.display = "block";
-    document.getElementById("image").style.display = "block";
-    initialize();
+    $("#game").show();
+    $("#timer").text = time;
 };
+
+
+function reset_question() {
+    guess = ""; //reset guess
+    $("#guess").text(guess);
+    document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
+    $("#next").hide(); //hide "appuyez sur entrer"
+    $("#bravo").hide(); //hide "bravo"
+    $("#infos").show(); //show "ecrivez qqchose"
+    pick_question(chosen_caterogy);
+    display_question();
+    fade_image();
+};
+
 
 function win_question(){
     $("#image").stop(); //stop animation
@@ -117,10 +109,13 @@ function win_question(){
 //##################################################################################################
 //##################################################################################################
 
-clear();
-$('#start').show();
 
-start_over();
+    clear();
+    //get_team_name_and_category(); //fonction a creer!!
+    reset_game();
+    reset_question();
+    //alert("fin du while");
+
 
 
 setInterval(function() {
@@ -128,7 +123,7 @@ setInterval(function() {
     $('#timer').text(time);
 }, 1000);
 
-//get and display guess
+//get and display guess 
 $(document).keydown(function(event){ //get guess
     var letter_pressed = String.fromCharCode(event.which); //get letter
     var key_pressed = event.which; //get key
@@ -146,7 +141,7 @@ $(document).keydown(function(event){ //get guess
             win_question();
         };
     }else if (key_pressed == 13 && nb_of_wins < WINS_MAX){ //next question on "enter"
-        initialize();
+        reset_question();
     };
     
 }); //end get guess
