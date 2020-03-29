@@ -5,8 +5,8 @@ var WILDCARD = "LOL";
 
 var questions = [
     "Qui a fait 9c?",
-    "Qui fait du deep water solo?",
-    "Qui grimpe sans corde?"];
+    "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
+    "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)"];
 
 var nb_of_questions = questions.length
 
@@ -35,9 +35,21 @@ var the_image= "";
 var start;
 var time = 0;
 
+function clear(){ //hide everything
+    
+    $('#start').hide();
+    $('#game').hide();
+    //$('#top_left').hide();
+    //$('#question').hide();
+    //$('#image').hide();
+    //$('#guess').hide();
+    //$('#bravo').hide();
+    //$('footer').hide();
+};
+
 function display_question(){
-    $('#question_box').text(the_question);
-    document.getElementById("image_box").innerHTML = "<img src=img/" + the_image + ">";
+    $('#question').text(the_question);
+    document.getElementById("image").innerHTML = "<img src=img/" + the_image + ">";
 };
 
 function display_wins(){
@@ -45,15 +57,15 @@ function display_wins(){
 };
 
 function fade_image() {
-    document.getElementById("image_box").style.opacity = 0;
-    $( "#image_box" ).animate({opacity: 1}, FADE_TIME * 1000,);
+    document.getElementById("image").style.opacity = 0;
+    $( "#image" ).animate({opacity: 1}, FADE_TIME * 1000,);
   };
 
 function initialize() {
     //reset CSS
     guess = ""; //reset guess
-    document.getElementById("guess_box").innerHTML = ""; //reset guess
-    document.getElementById("guess_box").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
+    document.getElementById("guess").innerHTML = ""; //reset guess
+    document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
     document.getElementById("next").style.display = "none"; //hide next
     document.getElementById("bravo").style.display = "none"; //hide bravo
     
@@ -77,16 +89,16 @@ function start_over() {
     nb_of_wins = 0;
     picked = new Array(nb_of_questions).fill(false);
     document.getElementById("top_left").style.display = "block";
-    document.getElementById("question_box").style.display = "block";
-    document.getElementById("guess_box").style.display = "block";
-    document.getElementById("image_box").style.display = "block";
+    document.getElementById("question").style.display = "block";
+    document.getElementById("guess").style.display = "block";
+    document.getElementById("image").style.display = "block";
     initialize();
 };
 
 function win_question(){
-    $("#image_box").stop(); //stop animation
-    document.getElementById("image_box").style.opacity = 1; //reveal image
-    document.getElementById("guess_box").style.backgroundColor = "chartreuse"; //set CSS
+    $("#image").stop(); //stop animation
+    document.getElementById("image").style.opacity = 1; //reveal image
+    document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
     picked[random_number] = true; //mark question as picked
     nb_of_wins ++; //inscrease nb_of_wins
     display_wins();
@@ -94,14 +106,19 @@ function win_question(){
         $('#next').show();
     } else { //end game
         $('#time').text(time);
-        $('#question_box').hide();
-        $('#image_box').hide();
+        $('#question').hide();
+        $('#image').hide();
         $('#top_left').hide();
-        $('#guess_box').hide();
+        $('#guess').hide();
         $('#bravo').show();
     };
 };
+//##################################################################################################
+//##################################################################################################
+//##################################################################################################
 
+clear();
+$('#start').show();
 
 start_over();
 
@@ -123,7 +140,7 @@ $(document).keydown(function(event){ //get guess
             document.getElementById("infos").style.display = "none"; //hide info
         };
 
-        document.getElementById("guess_box").innerHTML = guess; //display guess
+        document.getElementById("guess").innerHTML = guess; //display guess
 
         if (guess == the_answer || guess == WILDCARD){
             win_question();

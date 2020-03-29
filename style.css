@@ -1,22 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Sen:400,700,800&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Sen:400,700&display=swap');
 
 body{
 
     font-family: 'Sen', sans-serif;
+    overflow: hidden;
+    background-color: #eee;
 }
 
 img{
-    max-height: 80vh;
-    max-width: 80vw;
+    max-height: 600px;
+    max-width: 1000px;
 }
+
 main{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
     overflow: hidden;
     position: relative;
+    height: 100vh;
 }
 
 a{
@@ -27,7 +32,7 @@ a:visited{
     color: black;
 }
 
-#guess_box{ 
+#guess{ 
     font-size: 3rem;
     position: absolute;  
     left: 50%;                        
@@ -35,14 +40,35 @@ a:visited{
     transform: translate(-50%, -50%);
     
     }
+
+
+#top_left{
+    position: absolute;
+}
+
+#question_box {
+    display: flex;
+    max-width: 800px;
+    flex: 1;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+#question {
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px;
+}
+
 #main_window{ 
-    flex: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     position: relative;
     min-width: 800px;
-    }
+    flex: 1;
+}
 
 #bravo{
     position: absolute;  
@@ -50,17 +76,59 @@ a:visited{
     top: 50%;                        
     transform: translate(-50%, -50%); 
 }
-#top_left{
-    position: absolute;
-}
-#question_box {
-    font-size: 1.2rem;
-    flex: 1;
-    max-width: 900px;
-    padding-top: 10px;
+
+#team_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    flex: 2;
 }
 
-#infos {
-    
-    padding-top: 10px;
+#categories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 7vh;
+    width: 800px;
+    flex: 2;
+    font-size: 1.3rem;
+}
+
+.category {
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.category:hover {
+   
+    cursor: pointer;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+footer {
+    flex: 1;
+    padding-top: 5px;
+}
+/*
+div {
+    border: 1px solid red;
+}
+div:hover{
+    background-color: rgba(0, 255, 0, 0.3)
 }
