@@ -8,6 +8,10 @@ body{
     background-color: #eee;
 }
 
+#game{
+    display: none;
+}
+
 img{
     max-height: 500px;
     max-width: 1000px;

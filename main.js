@@ -1,9 +1,13 @@
 
-var WINS_MAX = 1;
-var FADE_TIME = 10;
+var WINS_MAX = 2;
+var FADE_TIME = 9;
 var WILDCARD = "LOL";
 
 var questions = [
+    "Qui a fait 9c?",
+    "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
+    "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)",
+    "qui est la plus belle",
     "Qui a fait 9c?",
     "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
     "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)",
@@ -15,15 +19,27 @@ var answers = [
     "ADAM ONDRA",
     "CHRIS SHARMA",
     "ALEX HONNOLD",
+    "JULIE",
+    "ADAM ONDRA",
+    "CHRIS SHARMA",
+    "ALEX HONNOLD",
     "JULIE"];
 
 var images = [
-    "ondra.jpg",
+    "julie.jpg",
     "sharma.jpg",
     "honnold.jpg",
-    "julie.jpg"];
+    "ondra.jpg",
+    "julie.jpg",
+    "sharma.jpg",
+    "honnold.jpg",
+    "ondra.jpg"];
 
 var categories = [
+    "Les amis du CAF",
+    "People",
+    "Sites et montagnes",
+    "Noeuds",
     "Les amis du CAF",
     "People",
     "Sites et montagnes",
@@ -41,18 +57,14 @@ var time = 0;
 var chosen_category = "";
 var win = false;
 
-function get_team_name_and_category(){
-    clear();
-    $('#start').show();
-    $(".category").click(function(){
-        chosen_category = $(this).text();
-        play();
-      });
-};
-
 function clear(){ //hide everything
     $('#start').hide();
     $('#game').hide();
+};
+
+function start(){
+    clear();
+    $('#start').show();
 };
 
 function display_question(){ //show question + image
@@ -65,8 +77,8 @@ function update_wins(){ //update number of wins
 };
 
 function fade_image() { //image animation
-    $( "#image" ).fadeTo(0, 0); //hide image
-    $( "#image" ).fadeTo(FADE_TIME * 1000, 1); //slowly reveal image
+    $("#image").fadeTo(0, 0); //hide image
+    $("#image").fadeTo(FADE_TIME * 1000, 1); //slowly reveal image
   };
 
 function pick_question(chosen_category){
@@ -80,6 +92,7 @@ function pick_question(chosen_category){
 };
 
 function reset_game() {
+    clear();
     start_time = new Date;
     nb_of_wins = 0;
     picked = new Array(nb_of_questions).fill(false); //reset "picked" array
@@ -92,7 +105,6 @@ function reset_game() {
     update_wins();
     reset_question();
 };
-
 
 function reset_question() {
     guess = ""; //reset guess
@@ -107,8 +119,7 @@ function reset_question() {
 };
 
 function win_question(){ //trigered when you win a question
-    $("#image").stop(); //stop animation
-    $( "#image" ).fadeTo(0, 1);//reveal image
+    $("#image").finish(); //stop animation
     document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
     picked[random_number] = true; //mark question as picked
     update_wins();
@@ -116,6 +127,7 @@ function win_question(){ //trigered when you win a question
 };
 
 function win_game(){ //trigered when you win last question
+    $("#image").finish(); //stop animation
     //hide question etc
     $('#question').hide(); 
     $('#image').hide();
@@ -134,17 +146,10 @@ setInterval(function() {
 //##################################################################################################
 //##################################################################################################
 
-clear();
-get_team_name_and_category();
-
-function play(){
-    clear();
-    $('#game').show();
+$(".category").click(function(){
+    chosen_category = $(this).text();
     reset_game();
-    //alert("fin du while");
-
-};
-    
+  });
 
 //listen to keyboard input
 $(document).keydown(function(event){
@@ -173,7 +178,7 @@ $(document).keydown(function(event){
             };
         }; //if win (only first time)
 
-    }else{ //if win
+    }else{ //if won
         if(key_pressed == 13 && nb_of_wins < WINS_MAX){
             reset_question()}
         ;
