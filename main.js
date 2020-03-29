@@ -35,6 +35,7 @@ var the_image= "";
 var start;
 var time = 0;
 var chosen_caterogy = "people";
+var win = false;
 
 function clear(){ //hide everything
     $('#start').hide();
@@ -46,7 +47,7 @@ function display_question(){
     document.getElementById("image").innerHTML = "<img src=img/" + the_image + ">";
 };
 
-function display_wins(){
+function update_wins(){
     $('#nb_of_wins').text(nb_of_wins + "/" + WINS_MAX);
 };
 
@@ -68,9 +69,10 @@ function pick_question(chosen_caterogy){
 function reset_game() {
     start = new Date;
     nb_of_wins = 0;
-    picked = new Array(nb_of_questions).fill(false);
+    picked = new Array(nb_of_questions).fill(false); //reset "picked" array
     $("#game").show();
-    $("#timer").text = time;
+    $("#top_left").show();
+    update_wins();
 };
 
 
@@ -93,41 +95,51 @@ function win_question(){
     document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
     picked[random_number] = true; //mark question as picked
     nb_of_wins ++; //inscrease nb_of_wins
-    display_wins();
+    update_wins();
     if (nb_of_wins < WINS_MAX){ //not done yet
         $('#next').show();
     } else { //end game
         $('#time').text(time);
-        $('#question').hide();
+        $('#question').hide(); 
         $('#image').hide();
         $('#top_left').hide();
         $('#guess').hide();
         $('#bravo').show();
     };
 };
+
+setInterval(function() {
+    time = Math.floor((new Date - start) / 1000)
+    $('#timer').text(time);
+}, 1000);
 //##################################################################################################
 //##################################################################################################
 //##################################################################################################
 
-
+function play(){
     clear();
     //get_team_name_and_category(); //fonction a creer!!
     reset_game();
     reset_question();
     //alert("fin du while");
 
+};
+
+play();
+    
 
 
-setInterval(function() {
-    time = Math.floor((new Date - start) / 1000)
-    $('#timer').text(time);
-}, 1000);
 
 //get and display guess 
 $(document).keydown(function(event){ //get guess
     var letter_pressed = String.fromCharCode(event.which); //get letter
     var key_pressed = event.which; //get key
-    if (guess != the_answer && guess != WILDCARD){ //if not right answer yet
+
+    if (guess == the_answer || guess == WILDCARD){
+        win = true;
+    };
+
+    if (!win){ //if not right answer yet
         if (key_pressed == 8 && guess.length > 0){ //if backspace
             guess = guess.slice(0, -1); //remove last letter
         } else if (guess.length < the_answer.length && ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32)){  //if key is letter
@@ -137,7 +149,7 @@ $(document).keydown(function(event){ //get guess
 
         document.getElementById("guess").innerHTML = guess; //display guess
 
-        if (guess == the_answer || guess == WILDCARD){
+        if (win){
             win_question();
         };
     }else if (key_pressed == 13 && nb_of_wins < WINS_MAX){ //next question on "enter"
