@@ -52,8 +52,8 @@ function update_wins(){
 };
 
 function fade_image() {
-    $( "#image" ).fadeTo(0, 0);
-    $( "#image" ).fadeTo(FADE_TIME * 1000, 1);
+    $( "#image" ).fadeTo(0, 0); //hide image
+    $( "#image" ).fadeTo(FADE_TIME * 1000, 1); //slowly reveal image
   };
 
 function pick_question(chosen_caterogy){
@@ -72,16 +72,20 @@ function reset_game() {
     picked = new Array(nb_of_questions).fill(false); //reset "picked" array
     $("#game").show();
     $("#top_left").show();
+    $("#question").show();
+    $("#guess").show();
+    $("#bravo").hide(); //hide "bravo"
     update_wins();
+    reset_question();
 };
 
 
 function reset_question() {
     guess = ""; //reset guess
+    win = false;
     $("#guess").text(guess);
     document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
-    $("#bravo").hide(); //hide "bravo"
     $("#infos").show(); //show "ecrivez qqchose"
     pick_question(chosen_caterogy);
     display_question();
@@ -91,21 +95,22 @@ function reset_question() {
 
 function win_question(){
     $("#image").stop(); //stop animation
-    document.getElementById("image").style.opacity = 1; //reveal image
+    $( "#image" ).fadeTo(0, 1);//reveal image
     document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
     picked[random_number] = true; //mark question as picked
-    nb_of_wins ++; //inscrease nb_of_wins
     update_wins();
-    if (nb_of_wins < WINS_MAX){ //not done yet
-        $('#next').show();
-    } else { //end game
-        $('#time').text(time);
-        $('#question').hide(); 
-        $('#image').hide();
-        $('#top_left').hide();
-        $('#guess').hide();
-        $('#bravo').show();
-    };
+    $('#next').show(); //show "appuyez sur entrer"
+};
+
+function win_game(){
+    //hide question etc
+    $('#question').hide(); 
+    $('#image').hide();
+    $('#top_left').hide();
+    $('#guess').hide();
+    //show bravo
+    $('#bravo').show();
+    $('#time').text(time); //write time
 };
 
 setInterval(function() {
@@ -120,7 +125,6 @@ function play(){
     clear();
     //get_team_name_and_category(); //fonction a creer!!
     reset_game();
-    reset_question();
     //alert("fin du while");
 
 };
@@ -130,30 +134,39 @@ play();
 
 
 
-//get and display guess 
-$(document).keydown(function(event){ //get guess
+//listen to keyboard input
+$(document).keydown(function(event){
     var letter_pressed = String.fromCharCode(event.which); //get letter
     var key_pressed = event.which; //get key
 
-    if (guess == the_answer || guess == WILDCARD){
-        win = true;
-    };
-
-    if (!win){ //if not right answer yet
+    if (!win){
         if (key_pressed == 8 && guess.length > 0){ //if backspace
             guess = guess.slice(0, -1); //remove last letter
-        } else if (guess.length < the_answer.length && ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32)){  //if key is letter
+        } else if ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32 || key_pressed == 189){  //if key is letter
             guess += letter_pressed; //add letter to guess
-            document.getElementById("infos").style.display = "none"; //hide info
+            $('#infos').hide(); //hide "ecrivez qqchose"
         };
-
-        document.getElementById("guess").innerHTML = guess; //display guess
+        $("#guess").text(guess); //update guess
+    
+        if (guess == the_answer || guess == WILDCARD){
+            win = true;
+        };
 
         if (win){
-            win_question();
-        };
-    }else if (key_pressed == 13 && nb_of_wins < WINS_MAX){ //next question on "enter"
-        reset_question();
+            nb_of_wins++;
+            if (nb_of_wins < WINS_MAX){
+                win_question();
+            }else{
+                win_game();
+            };
+        }; //if win (only first time)
+
+    }else{ //if win
+        if(key_pressed == 13 && nb_of_wins < WINS_MAX){
+            reset_question()}
+        ;
     };
     
-}); //end get guess
+}); //end listen to keyboard
+
+
