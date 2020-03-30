@@ -206,7 +206,7 @@ function reset_question() {
     $("#guess").text(""); //clear guess
     $("#guess").removeClass("crazy");
     $("#guess").hide(); //hide guess
-    document.getElementById("guess").style.backgroundColor = "rgba(0, 0, 0, 0.5)"; //reset css
+    document.getElementById("guess").style.backgroundColor = "rgba(0, 0, 0, 0.3)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
     $("#infos").show(); //show "ecrivez qqchose"
     pick_question(chosen_category);
