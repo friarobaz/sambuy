@@ -1,4 +1,3 @@
-
 var WINS_MAX = 2;
 var FADE_TIME = 9;
 var WILDCARD = "LOL";
@@ -12,8 +11,6 @@ var questions = [
     "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
     "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)",
     "qui est la plus belle"];
-
-var nb_of_questions = questions.length
 
 var answers = [
     "ADAM ONDRA",
@@ -45,6 +42,20 @@ var categories = [
     "Sites et montagnes",
     "Noeuds"];
 
+var ALL_QUESTIONS = [[]];
+
+for (i = 0; i < questions.length; i++) {
+    ALL_QUESTIONS[i] = [];
+    ALL_QUESTIONS[i][0] = questions[i];
+    ALL_QUESTIONS[i][1] = answers[i];
+    ALL_QUESTIONS[i][2] = images[i];
+    ALL_QUESTIONS[i][3] = categories[i];
+};
+var question = 0;
+var answer = 1;
+var image = 2;
+var category = 3;
+
 var picked = [];
 var guess = "";
 var nb_of_wins = 0;
@@ -56,6 +67,10 @@ var start_time;
 var time = 0;
 var chosen_category = "";
 var win = false;
+
+function test(){
+    alert(ALL_QUESTIONS[0]);
+};
 
 function clear(){ //hide everything
     $('#start').hide();
@@ -82,9 +97,9 @@ function fade_image() { //image animation
   };
 
 function pick_question(chosen_category){
-    random_number = Math.floor( Math.random() * nb_of_questions); //pick random number
+    random_number = Math.floor( Math.random() * questions.length); //pick random number
     while (picked[random_number] || categories[random_number] != chosen_category){ ; //check if unpicked and right category
-        random_number = Math.floor( Math.random() * nb_of_questions) //reroll
+        random_number = Math.floor( Math.random() * questions.length) //reroll
     } //end while
     the_question = questions[random_number];
     the_answer = answers[random_number];
@@ -95,7 +110,7 @@ function reset_game() {
     clear();
     start_time = new Date;
     nb_of_wins = 0;
-    picked = new Array(nb_of_questions).fill(false); //reset "picked" array
+    picked = new Array(questions.length).fill(false); //reset "picked" array
     //show game elements
     $("#game").show();
     $("#top_left").show();
