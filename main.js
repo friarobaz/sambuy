@@ -1,5 +1,3 @@
-
-
 var WINS_MAX = 3;
 var FADE_TIME = 3;
 var WILDCARD = "LOL";
