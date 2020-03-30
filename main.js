@@ -1,4 +1,4 @@
-var WINS_MAX = 2;
+var WINS_MAX = 3;
 var FADE_TIME = 9;
 var WILDCARD = "LOL";
 
@@ -78,9 +78,10 @@ var start_time;
 var time = 0;
 var chosen_category = "";
 var win = false;
+var available_questions = [];
 
 function test(){
-    alert(ALL_QUESTIONS[0]);
+    alert("test");
 };
 
 function clear(){ //hide everything
@@ -108,20 +109,24 @@ function fade_image() { //image animation
   };
 
 function pick_question(chosen_category){
-    random_number = Math.floor( Math.random() * questions.length); //pick random number
-    while (picked[random_number] || categories[random_number] != chosen_category){ ; //check if unpicked and right category
-        random_number = Math.floor( Math.random() * questions.length) //reroll
-    } //end while
-    the_question = questions[random_number];
-    the_answer = answers[random_number];
-    the_image = images[random_number];
+    random_number = Math.floor( Math.random() * available_questions.length); 
+    the_question = available_questions[random_number][question];
+    the_answer = available_questions[random_number][answer];
+    the_image = available_questions[random_number][image];
 };
 
-function reset_game() {
+function reset_game(chosen_category) {
     clear();
     start_time = new Date;
     nb_of_wins = 0;
-    picked = new Array(questions.length).fill(false); //reset "picked" array
+
+    //pick all questions from chosen category
+    for (i = 0; i < ALL_QUESTIONS.length; i++) {
+        if (ALL_QUESTIONS[i][category] == chosen_category){
+            available_questions.push(ALL_QUESTIONS[i]);
+        };
+    };
+    
     //show game elements
     $("#game").show();
     $("#top_left").show();
@@ -147,7 +152,7 @@ function reset_question() {
 function win_question(){ //trigered when you win a question
     $("#image").finish(); //stop animation
     document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
-    picked[random_number] = true; //mark question as picked
+    available_questions.splice(random_number, 1); //remove question from list
     update_wins();
     $('#next').show(); //show "appuyez sur entrer"
 };
@@ -174,7 +179,7 @@ setInterval(function() {
 
 $(".category").click(function(){
     chosen_category = $(this).text();
-    reset_game();
+    reset_game(chosen_category);
   });
 
 //listen to keyboard input
