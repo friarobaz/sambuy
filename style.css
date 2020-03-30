@@ -12,6 +12,10 @@ body{
     display: none;
 }
 
+#score_page{
+    display: none;
+}
+
 img{
     max-height: 500px;
     max-width: 1000px;
@@ -36,11 +40,14 @@ a:visited{
 }
 
 #guess{ 
-    font-size: 3rem;
+    font-size: 2rem;
     position: absolute;  
     left: 50%;                        
     top: 50%;                        
     transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 50px;
+    font-weight: 700;
 }
 
 #top_left{
@@ -89,12 +96,21 @@ a:visited{
     flex: 2;
 }
 
+#team{
+    font-size: 2rem;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+}
+
 #categories{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
-    padding-top: 7vh;
+    padding-top: 5vh;
     width: 800px;
     flex: 2;
     font-size: 1.3rem;
@@ -102,17 +118,22 @@ a:visited{
 
 .category {
     border: 1px solid gray;
-    padding: 10px;
+    padding: 20px;
+    border-radius: 50px;
 }
 
 .category:hover {
-   
     cursor: pointer;
+}
+
+.crazy{
+    border: none;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
+    animation: test 5s ease infinite;
 }
-@keyframes gradient {
+
+@keyframes test {
 	0% {
 		background-position: 0% 50%;
 	}

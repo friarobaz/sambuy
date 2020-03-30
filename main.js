@@ -66,9 +66,11 @@ var categories = [
     "Les amis du CAF",
     ];
 
-var ALL_QUESTIONS = [[]];
 
-for (i = 0; i < questions.length; i++) {
+
+var ALL_QUESTIONS = [];
+
+for (i = 0; i < questions.length; i++) { //fill ALL_QUESTIONS with everything
     ALL_QUESTIONS[i] = [];
     ALL_QUESTIONS[i][0] = questions[i];
     ALL_QUESTIONS[i][1] = answers[i];
@@ -76,7 +78,24 @@ for (i = 0; i < questions.length; i++) {
     ALL_QUESTIONS[i][3] = categories[i];
 };
 
-var guess = "";
+function unique(list) { //create unique function to sort categories
+    var result = [];
+    $.each(list, function(i, e) {
+      if ($.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
+};
+
+var high_scores =[];
+
+for (i = 0; i < unique(categories).length; i++) { //fill high_scores with categories
+    high_scores[i] = [];
+    high_scores[i][0] = unique(categories)[i]; //category name
+    high_scores[i][1] = ""; //team name
+    high_scores[i][2] = 99999999999999; //team time (oui oui je sais...)
+};
+
+var input = "";
 var nb_of_wins = 0;
 var random_number = 0;
 var the_question = "";
@@ -84,12 +103,24 @@ var the_answer = "";
 var the_image= "";
 var start_time;
 var time = 0;
+var recorded_time = 0;
 var chosen_category = "";
 var win = false;
 var available_questions = [];
+var team_name = "";
+
 
 function test(){
-    alert("win:" + win + " time:" + time + " guess:" + guess);
+    console.log(input);
+};
+
+function write_scores(){
+    for (i = 0; i < unique(categories).length; i++) { //fill high_scores with categories
+        if (high_scores[i][0] == chosen_category && recorded_time < high_scores[i][2]){
+            high_scores[i][1] = team_name; //team name
+            high_scores[i][2] = recorded_time; //team time
+        };
+    }; //end for
 };
 
 function clear(){ //hide everything
@@ -99,6 +130,10 @@ function clear(){ //hide everything
 
 function start(){
     clear();
+    team_name = "";
+    input = "";
+    win = false;
+    $('#team').text("Ecrivez quelque chose!");
     chosen_category = "";
     $('#start').show();
 };
@@ -110,8 +145,19 @@ function display_question(){ //show question + image
         fade_image();
     }else {
         $('#image').hide();
-    };
-    
+    }; 
+};
+
+function displayScores(){ //show high scores
+    clear();
+    $('#score_page').show();
+    input = "";
+    $('#scores').text(""); //clear score page
+    $('#scores').append("<ul>");
+    for (i = 0; i < unique(categories).length; i++) { 
+        $('#scores').append("<li><strong>" + high_scores[i][0] + ":</strong> " + high_scores[i][2] + " secondes par l'équipe " + high_scores[i][1]);
+    }; //end for
+    $('#scores').append("</ul>");
 };
 
 function update_wins(){ //update number of wins
@@ -154,9 +200,10 @@ function reset_game(chosen_category) {
 };
 
 function reset_question() {
-    guess = ""; //reset guess
+    input = ""; //reset input
     win = false;
-    $("#guess").text(guess); //clear guess
+    $("#guess").text(""); //clear guess
+    $("#guess").removeClass("crazy");
     document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
     $("#infos").show(); //show "ecrivez qqchose"
@@ -166,7 +213,7 @@ function reset_question() {
 
 function win_question(){ //trigered when you win a question
     $("#image").finish(); //stop animation
-    document.getElementById("guess").style.backgroundColor = "chartreuse"; //set CSS
+    $("#guess").addClass("crazy"); //set CSS
     available_questions.splice(random_number, 1); //remove question from list
     update_wins();
     $('#next').show(); //show "appuyez sur entrer"
@@ -179,9 +226,11 @@ function win_game(){ //trigered when you win last question
     $('#image').hide();
     $('#top_left').hide();
     $('#guess').hide();
+    $('#next').hide();
     //show bravo
     $('#bravo').show();
-    $('#time').text(time); //write time
+    $('#time').text(recorded_time); //write time
+    write_scores();
 };
 
 //############################################################################################################################
@@ -192,7 +241,14 @@ function win_game(){ //trigered when you win last question
 
 $(".category").click(function(){ //start game if category is clicked
     chosen_category = $(this).text();
-    reset_game(chosen_category);
+    team_name = input;
+    if (team_name){
+        reset_game(chosen_category);
+    }else {
+        //document.getElementById("team").style.backgroundColor = "red";
+        $("#team").css("background-color", "rgba(255,0,0,0.3)");
+    };
+    
 });
 
 setInterval( //update timer every second
@@ -210,33 +266,47 @@ $(document).keydown(function(event){
     var key_pressed = event.which; //get key
 
     if (!win){ //if player hasnt won yet
-        if (key_pressed == 8 && guess.length > 0){ //if backspace
-            guess = guess.slice(0, -1); //remove last letter
-        } else if ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32 || key_pressed == 189){  //if key is letter
-            guess += letter_pressed; //add letter to guess
+        if (key_pressed == 8 && input.length > 0){ //if backspace and input not empty
+            input = input.slice(0, -1); //remove last letter
+        } else if ((key_pressed > 64 && key_pressed < 91) || key_pressed == 32 || key_pressed == 189){  //if key is letter or space or dash
+            input += letter_pressed; //add letter to input
             $('#infos').hide(); //hide "ecrivez qqchose"
         };
-        $("#guess").text(guess); //update guess
-        //$("#team").text(guess); //TEST TEAM
-        if( $("#game").css('display') == 'block') {
-            if (guess == the_answer || guess == WILDCARD){
+        $("#guess").text(input); //update guess
+        $("#team").text(input); //update team name
+
+        if($("#game").css('display') == 'block') { //if playing
+            if (input == the_answer || input == WILDCARD){
                 win = true;
             };
+        }else if($("#start").css('display') == 'block') { //if menu
+            if (input == "VOIR LES SCORES"){
+                displayScores();
+            }else if (input){
+                //$("#team").removeClass("crazy");
+               // $(".category").addClass("crazy");
+            };
+        }else{
+            start();
         };
 
         if (win){
             nb_of_wins++;
             if (nb_of_wins < WINS_MAX){
                 win_question();
-            }else{
-                win_game();
+            }else{ //game won
+                win_question();
+                recorded_time = time;
+
             };
         }; //if win (only first time)
 
     }else{ //if won
         if(key_pressed == 13 && nb_of_wins < WINS_MAX){
-            reset_question()}
-        ;
+            reset_question()
+        }else if (key_pressed == 13 && nb_of_wins == WINS_MAX){
+            win_game();
+        };
     };
     
 }); //end listen to keyboard
