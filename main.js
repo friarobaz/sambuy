@@ -188,18 +188,25 @@ function win_game(){ //trigered when you win last question
     $('#time').text(time); //write time
 };
 
-setInterval(function() {
-    time = Math.floor((new Date - start_time) / 1000)
-    $('#timer').text(time);
-}, 1000);
-//##################################################################################################
-//##################################################################################################
-//##################################################################################################
+//############################################################################################################################
+//############################################################################################################################
+//############################################################################################################################
 
-$(".category").click(function(){
+//these functions are always running
+
+$(".category").click(function(){ //start game if category is clicked
     chosen_category = $(this).text();
     reset_game(chosen_category);
-  });
+});
+
+setInterval( //update timer every second
+    function() {
+        time = Math.floor((new Date - start_time) / 1000)
+        if (!isNaN(time)){
+            $('#timer').text(time);
+        };
+    }, 1000 //refresh time
+);
 
 //listen to keyboard input
 $(document).keydown(function(event){
