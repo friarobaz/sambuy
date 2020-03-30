@@ -1,4 +1,5 @@
 var WINS_MAX = 3;
+$('#WINS_MAX').text(WINS_MAX);
 var FADE_TIME = 3;
 var WILDCARD = "LOL";
 

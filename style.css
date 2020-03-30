@@ -23,6 +23,7 @@ li{
 img{
     max-height: 500px;
     max-width: 1000px;
+    cursor: none;
 }
 
 main{
