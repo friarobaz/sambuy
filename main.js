@@ -89,7 +89,7 @@ var win = false;
 var available_questions = [];
 
 function test(){
-    alert("test");
+    alert("win:" + win + " time:" + time + " guess:" + guess);
 };
 
 function clear(){ //hide everything
@@ -217,9 +217,11 @@ $(document).keydown(function(event){
             $('#infos').hide(); //hide "ecrivez qqchose"
         };
         $("#guess").text(guess); //update guess
-    
-        if (guess == the_answer || guess == WILDCARD){
-            win = true;
+        //$("#team").text(guess); //TEST TEAM
+        if( $("#game").css('display') == 'block') {
+            if (guess == the_answer || guess == WILDCARD){
+                win = true;
+            };
         };
 
         if (win){
