@@ -75,10 +75,6 @@ for (i = 0; i < questions.length; i++) {
     ALL_QUESTIONS[i][2] = images[i];
     ALL_QUESTIONS[i][3] = categories[i];
 };
-var question = 0;
-var answer = 1;
-var image = 2;
-var category = 3;
 
 var guess = "";
 var nb_of_wins = 0;
@@ -129,9 +125,9 @@ function fade_image() { //image animation
 
 function pick_question(chosen_category){
     random_number = Math.floor( Math.random() * available_questions.length); 
-    the_question = available_questions[random_number][question];
-    the_answer = available_questions[random_number][answer];
-    the_image = available_questions[random_number][image];
+    the_question = available_questions[random_number][0];
+    the_answer = available_questions[random_number][1];
+    the_image = available_questions[random_number][2];
 };
 
 function reset_game(chosen_category) {
@@ -142,7 +138,7 @@ function reset_game(chosen_category) {
 
     //pick all questions from chosen category
     for (i = 0; i < ALL_QUESTIONS.length; i++) {
-        if (ALL_QUESTIONS[i][category] == chosen_category){
+        if (ALL_QUESTIONS[i][3] == chosen_category){
             available_questions.push(ALL_QUESTIONS[i]);
         };
     };
