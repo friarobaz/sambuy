@@ -1,5 +1,5 @@
 var WINS_MAX = 3;
-var FADE_TIME = 9;
+var FADE_TIME = 3;
 var WILDCARD = "LOL";
 
 var questions = [
@@ -13,6 +13,9 @@ var questions = [
     "C'est une BD",
     "C'est en Corse",
     "C'est en france et tres haut",
+    "Qui au CAF 1",
+    "Qui au CAF 2",
+    "Qui au CAF 3",
     ];
 
 var answers = [
@@ -26,6 +29,9 @@ var answers = [
     "AILEFROIDE",
     "BAVELLA",
     "MONT BLANC",
+    "CAF",
+    "CAF",
+    "CAF",
     ];
 
 var images = [
@@ -39,6 +45,9 @@ var images = [
     "ailefroide.jpg",
     "bavella.jpg",
     "blanc.jpg",
+    "",
+    "",
+    "",
     ];
 
 var categories = [
@@ -52,6 +61,9 @@ var categories = [
     "Sites et montagnes",
     "Sites et montagnes",
     "Sites et montagnes",
+    "Les amis du CAF",
+    "Les amis du CAF",
+    "Les amis du CAF",
     ];
 
 var ALL_QUESTIONS = [[]];
@@ -91,12 +103,19 @@ function clear(){ //hide everything
 
 function start(){
     clear();
+    chosen_category = "";
     $('#start').show();
 };
 
 function display_question(){ //show question + image
     $('#question').text(the_question);
-    document.getElementById("image").innerHTML = "<img src=img/" + the_image + ">";
+    if (the_image){
+        document.getElementById("image").innerHTML = "<img src=img/" + the_image + ">";
+        fade_image();
+    }else {
+        $('#image').hide();
+    };
+    
 };
 
 function update_wins(){ //update number of wins
@@ -119,6 +138,7 @@ function reset_game(chosen_category) {
     clear();
     start_time = new Date;
     nb_of_wins = 0;
+    available_questions = []; //empty available questions
 
     //pick all questions from chosen category
     for (i = 0; i < ALL_QUESTIONS.length; i++) {
@@ -146,7 +166,6 @@ function reset_question() {
     $("#infos").show(); //show "ecrivez qqchose"
     pick_question(chosen_category);
     display_question();
-    fade_image();
 };
 
 function win_question(){ //trigered when you win a question
