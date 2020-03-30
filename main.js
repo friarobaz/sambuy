@@ -205,6 +205,7 @@ function reset_question() {
     win = false;
     $("#guess").text(""); //clear guess
     $("#guess").removeClass("crazy");
+    $("#guess").hide(); //hide guess
     document.getElementById("guess").style.backgroundColor = "rgba(0, 0, 0, 0.5)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
     $("#infos").show(); //show "ecrivez qqchose"
@@ -277,6 +278,11 @@ $(document).keydown(function(event){
         $("#team").text(input); //update team name
 
         if($("#game").css('display') == 'block') { //if playing
+            if (!input){
+                $('#guess').hide();
+            }else{
+                $('#guess').show();
+            };
             if (input == the_answer || input == WILDCARD){
                 win = true;
             };
