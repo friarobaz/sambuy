@@ -130,6 +130,7 @@ function clear(){ //hide everything
 
 function start(){
     clear();
+    $(".category").addClass("disabled");
     team_name = "";
     input = "";
     win = false;
@@ -204,7 +205,7 @@ function reset_question() {
     win = false;
     $("#guess").text(""); //clear guess
     $("#guess").removeClass("crazy");
-    document.getElementById("guess").style.backgroundColor = "rgba(255, 255, 255, 0.5)"; //reset css
+    document.getElementById("guess").style.backgroundColor = "rgba(0, 0, 0, 0.5)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
     $("#infos").show(); //show "ecrivez qqchose"
     pick_question(chosen_category);
@@ -284,7 +285,9 @@ $(document).keydown(function(event){
                 displayScores();
             }else if (input){
                 //$("#team").removeClass("crazy");
-               // $(".category").addClass("crazy");
+                $(".category").removeClass("disabled");
+            }else{
+                $(".category").addClass("disabled");
             };
         }else{
             start();
