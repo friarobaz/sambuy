@@ -16,7 +16,6 @@
     return response.json()
   })
   .then((data) => {
-      console.log(data)
     for (const entry of data.feed.entry) {
         if (!questions[entry['gs$cell'].row]) {
             questions[entry['gs$cell'].row] = {}
