@@ -248,10 +248,10 @@ $(".category").click(function(){ //start game if category is clicked
     if (team_name){
         reset_game(chosen_category);
     }else {
-        //document.getElementById("team").style.backgroundColor = "red";
-        $("#team").css("background-color", "rgba(255,0,0,0.3)");
+        $("#choose").css("text-decoration", "underline");
+        $("#choose").css("font-weight", "bold");
+        $("#choose").css("font-size", "1.1rem");
     };
-    
 });
 
 setInterval( //update timer every second
@@ -291,8 +291,10 @@ $(document).keydown(function(event){
             if (input == "VOIR LES SCORES"){
                 displayScores();
             }else if (input){
-                //$("#team").removeClass("crazy");
                 $(".category").removeClass("disabled");
+                $("#choose").css("text-decoration", "none");
+                $("#choose").css("font-weight", "normal");
+                $("#choose").css("font-size", "1rem");
             }else{
                 $(".category").addClass("disabled");
             };
