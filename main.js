@@ -5,42 +5,54 @@ var WILDCARD = "LOL";
 var questions = [
     "Qui a fait 9c?",
     "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
-    "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)",
+    "qui fait du deep water solo?",
     "qui est la plus belle",
-    "Qui a fait 9c?",
-    "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
-    "Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)",
-    "qui est la plus belle"];
+    "Quel neoud est super bien pour s'encorder?",
+    "Quel neoud sert a rien?",
+    "Quel neoud est trop utile?",
+    "C'est une BD",
+    "C'est en Corse",
+    "C'est en france et tres haut",
+    ];
 
 var answers = [
     "ADAM ONDRA",
-    "CHRIS SHARMA",
     "ALEX HONNOLD",
+    "CHRIS SHARMA",
     "JULIE",
-    "ADAM ONDRA",
-    "CHRIS SHARMA",
-    "ALEX HONNOLD",
-    "JULIE"];
+    "CHAISE",
+    "CHAISE DOUBLE",
+    "CABESTAN",
+    "AILEFROIDE",
+    "BAVELLA",
+    "MONT BLANC",
+    ];
 
 var images = [
-    "julie.jpg",
-    "sharma.jpg",
-    "honnold.jpg",
     "ondra.jpg",
-    "julie.jpg",
-    "sharma.jpg",
     "honnold.jpg",
-    "ondra.jpg"];
+    "sharma.jpg",
+    "julie.jpg",
+    "chaise.jpg",
+    "chaise_double.jpg",
+    "cabestan.jpg",
+    "ailefroide.jpg",
+    "bavella.jpg",
+    "blanc.jpg",
+    ];
 
 var categories = [
-    "Les amis du CAF",
     "People",
-    "Sites et montagnes",
+    "People",
+    "People",
+    "People",
     "Noeuds",
-    "Les amis du CAF",
-    "People",
+    "Noeuds",
+    "Noeuds",
     "Sites et montagnes",
-    "Noeuds"];
+    "Sites et montagnes",
+    "Sites et montagnes",
+    ];
 
 var ALL_QUESTIONS = [[]];
 
@@ -56,7 +68,6 @@ var answer = 1;
 var image = 2;
 var category = 3;
 
-var picked = [];
 var guess = "";
 var nb_of_wins = 0;
 var random_number = 0;
