@@ -113,6 +113,7 @@ var team_name = "";
 
 function test(){
     console.log(input);
+    alert(ALL_QUESTIONS);
 };
 
 function write_scores(){
