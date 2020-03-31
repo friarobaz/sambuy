@@ -1,6 +1,6 @@
-var WINS_MAX = 5;
+var WINS_MAX = 500;
 $('#WINS_MAX').text(WINS_MAX);
-var FADE_TIME = 3;
+var FADE_TIME = 20;
 var WILDCARD = "LOL";
 
 var questions = [
@@ -59,7 +59,6 @@ var chosen_category = "";
 var win = false;
 var available_questions = [];
 var team_name = "";
-var guess_ratio = 0;
 
 
 function test(){
@@ -242,19 +241,24 @@ $(document).keydown(function(event){
             if (input == the_answer || input == WILDCARD){
                 win = true;
             }else { //if not the answer yet
-                guess_ratio = 0;
+                var guess_ratio = 0;
                 var previous_letter = true;
-                for (i = 0; i < input.length; i++) { 
-                    if (previous_letter && input.charAt(i) == the_answer.charAt(i)){
-                        guess_ratio += 100 / the_answer.length;
+                var win_ratio = 0;
+                var lose_ratio = 0;
+                for (i = 0; i < input.length; i++) {  //check all input letters
+                    if (previous_letter && input.charAt(i) == the_answer.charAt(i)){ //if good letter and good previous letter
+                        win_ratio += 100 / the_answer.length;
                     } //end if right letter
                     else if (input.charAt(i)){
-                        guess_ratio -= 300 / the_answer.length;
+                        win_ratio = 0;
+                        lose_ratio += 10;
                         previous_letter = false;
                     }; //end if wrong letter
                 }; //end for
+                guess_ratio = win_ratio - lose_ratio;
+                
                 if (guess_ratio>0){
-                    document.getElementById("guess").style.backgroundColor = "rgba(0, 255, 0, " + guess_ratio/100 + ")";
+                    document.getElementById("guess").style.backgroundColor = "rgba(0, 150, 0, " + guess_ratio/100 + ")";
                 } else {
                     document.getElementById("guess").style.backgroundColor = "rgba(255, 0, 0, " + Math.abs(guess_ratio)/100 + ")";
                 };
