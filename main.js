@@ -1,4 +1,4 @@
-var WINS_MAX = 10;
+var WINS_MAX = 1000;
 $('#WINS_MAX').text(WINS_MAX);
 var FADE_TIME = 3;
 var WILDCARD = "LOL";
@@ -18,8 +18,6 @@ var images = [
 var categories = [
     "People","People","People","People","People","People","People","People","People","People","People","People","People","People","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF"
     ];
-
-
 
 var ALL_QUESTIONS = [];
 
@@ -141,6 +139,10 @@ function reset_game(chosen_category) {
         if (ALL_QUESTIONS[i][3] == chosen_category){
             available_questions.push(ALL_QUESTIONS[i]);
         };
+    };
+
+    if (WINS_MAX > available_questions.length){
+        WINS_MAX = available_questions.length;
     };
     
     //show game elements
