@@ -1,4 +1,4 @@
-var WINS_MAX = 1000;
+var WINS_MAX = 5;
 $('#WINS_MAX').text(WINS_MAX);
 var FADE_TIME = 3;
 var WILDCARD = "LOL";
@@ -59,10 +59,11 @@ var chosen_category = "";
 var win = false;
 var available_questions = [];
 var team_name = "";
+var guess_ratio = 0;
 
 
 function test(){
-    console.log(input);
+    console.log();
 };
 
 function write_scores(){
@@ -158,10 +159,10 @@ function reset_game(chosen_category) {
 function reset_question() {
     input = ""; //reset input
     win = false;
+    guess_ratio = 0;
     $("#guess").text(""); //clear guess
     $("#guess").removeClass("crazy");
     $("#guess").hide(); //hide guess
-    document.getElementById("guess").style.backgroundColor = "rgba(0, 0, 0, 0.3)"; //reset css
     $("#next").hide(); //hide "appuyez sur entrer"
     $("#infos").show(); //show "ecrivez qqchose"
     pick_question(chosen_category);
@@ -240,7 +241,27 @@ $(document).keydown(function(event){
             };
             if (input == the_answer || input == WILDCARD){
                 win = true;
-            };
+            }else { //if not the answer yet
+                guess_ratio = 0;
+                var previous_letter = true;
+                for (i = 0; i < input.length; i++) { 
+                    if (previous_letter && input.charAt(i) == the_answer.charAt(i)){
+                        guess_ratio += 100 / the_answer.length;
+                    } //end if right letter
+                    else if (input.charAt(i)){
+                        guess_ratio -= 300 / the_answer.length;
+                        previous_letter = false;
+                    }; //end if wrong letter
+                }; //end for
+                if (guess_ratio>0){
+                    document.getElementById("guess").style.backgroundColor = "rgba(0, 255, 0, " + guess_ratio/100 + ")";
+                } else {
+                    document.getElementById("guess").style.backgroundColor = "rgba(255, 0, 0, " + Math.abs(guess_ratio)/100 + ")";
+                };
+                
+                console.log(guess_ratio);
+            }; // end if not the answer yet
+
         }else if($("#start").css('display') == 'block') { //if menu
             if (input == "VOIR LES SCORES"){
                 displayScores();
