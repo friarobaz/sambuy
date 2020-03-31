@@ -1,70 +1,22 @@
-var WINS_MAX = 3;
+var WINS_MAX = 10;
 $('#WINS_MAX').text(WINS_MAX);
 var FADE_TIME = 3;
 var WILDCARD = "LOL";
 
 var questions = [
-    "Qui a fait 9c?",
-    "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)",
-    "qui fait du deep water solo?",
-    "qui est la plus belle",
-    "Quel neoud est super bien pour s'encorder?",
-    "Quel neoud sert a rien?",
-    "Quel neoud est trop utile?",
-    "C'est une BD",
-    "C'est en Corse",
-    "C'est en france et tres haut",
-    "Qui au CAF 1",
-    "Qui au CAF 2",
-    "Qui au CAF 3",
+    "Quel grimpeur est connu pour ses ascensions en solo intégral, notamment la voie Freerider en 2017, sur le mythique big wall El Cap, au Yosemite? (prénom et nom)","Quel grimpeur américain dont il manque un doigt a donné le prénom Fitz à son fils en hommage au Fitzroy, célèbre sommet en Patagonie qu'il a grimpé en libre en 2006? Il est aussi connu pour avoir le reccord de vitesse du Nose, au yosemite, qu'il a grimpé en moins de 2h... (prénom et nom)","Quel grimeur tchèque a fait la voie la plus dure de l'histoire: Silence, 9c à Flatanger en Norvège? (prénom et nom)","Quelle grimpeuse et écrivaine faisant souvent des expéditions avec son mari Arnaud Petit est connue pour avoir écrit le livre A la verticale de soi? (prénom et nom)","Quel grimpeur français connu pour ses  ascensions en solo, a été la star des films Opéra vertical et La vie au bout des doigts? (prénom et nom)","Quel grimpeur espagnol est connu pour avoir grimpé la dura-dura, un 9b+ en Catalogne, ainsi que pour ses exploits en deep water solo à Majorque? (prénom et nom)","Quel grimpeur connu pour ses expéditions d'ouvertures de grandes voies partout dans le monde a grimpé la voie Black Bean à Céüse sur coinceurs? (prénom et nom)","Quelle jeune grimpeuse américano-japinaose a été la première grimpeuse à réussir un 8c bloc en 2016 (elle avait 14 ans)? (prénom et nom)","Quelle grimpeuse a été la première femme à réaliser la voie Biographie, à Céuse, reconnue comme étant le premier 9a+ féminin? (prénom et nom)","Quelle grimpeuse américaine est connue pour avoir été la permière personne à avoir grimpé El Cap en libre en 1994? (prénom et nom)","Quelle grimpeuse française ayant été parmi les meilleures mondiales dans les années 80, est aussi connue pour ses exploits en alpinisme et en solo intégral?","Quelle grimpeuse suisse ayant été 10 ans en couple avec Cédric Lachat et vivant à Grenoble est connue ses films Orbayu et Silbergeier? ","Quel grimpeur, guide de haute montagne et écrivain né en 1906 est connu pour ses romans Premier de cordée et La grande crevasse?","Quel médecin urgentiste à Chamonix spécialiste du secours en montagne et des pathologies du froid, mort en 2018 emporté par une avalanche, est connu pour son livre Docteur Vertical","Quel est ce noeud? (1 mot)","Quel est ce noeud? (1 mot)","Quel est ce noeud? (1 mot)","Quel est ce noeud? (2 mots)","Quel est ce noeud? (2 mots)","Quel est ce noeud? (1 mot)","Quel est ce noeud? (1 mot)","Quel est ce noeud? (1 mot)","Quel est ce noeud? (1 mot)","Quelle est cette montagne des Bauges?","Quelle est cette montagne des Bornes?","Quelle est cette montagne des Bornes?","Quelle est cette montagne des Aravis? (1 mot)","Quel est ce massif? (2 mots)","Quel est ce massif? (1 mot)","Quelle est cette montagne du Beaufortain? (2 mots)","Quelle est cette montagne de Patagonie? (1 mot)","Quelle est cette montagne Corse? (1 mot)","Quelle est cette montagne située à la frontière italo-suisse aussi appelée Matterhorn? (1 mot)","Quel est ce mont situé dans le Vercors sur la commune de Chichilianne? (1 mot)","Quel est ce sommet des alpes situé dans le massif du mont blanc duquel de détachent 6 pointes dont la Walker et la Whymper (où se trouve la voie Bonatti Vaucher)? (2 mots)","Quelle est cette aiguille du massif du mont blanc où se trouve l'arête des cosmiques? (1 mot)","Quel est le nom de l'insecte auquel est associé ce lieu dans les aravis, au sommet de la combe de Paccaly et de la combe du Grand Cret?","Quelle est cette chaine connue des Alpes? (1 mot)","Quel est ce massif italien des préalpes méridionales dont le point culminant est la Marmolada? (1 mot)","Quel est le nom de cette pointe, point culminant des Aravis? (1 mot)","Quel est ce pic des pyrénées connu pour la présence d'un observatoire astronomique à son sommet? (1 mot)","Quelle est cette montagne des Hautes-Alpes où se trouve la voie Biographie en 9a+? (1 mot)","Quelle est cette chaine montagneuse aux 3 pointes connue des grimpeurs et parapentises de Haute-Savoie? (1 mot)","Quel est ce site d'escalade mythique en France connu notamment pour les voies Pichenibule, La demande et Les enragés?","Quel est ce site d'escalade en France, lieu où a grandi l'auteur et alpiniste Gaston Rébuffat, où on peut grimper en t-shirt toute l'année si le Mistral le permet?","Quel est ce site d'escalade du Luberon, réputé pour son calcaire à trous?","Quel est ce site d'escalade en France, lieu de pelerinage de bloqueurs du monde entier?","Quel est ce site d'escalade de la Sierra de Gurara, en Espagne, qui regroupe grimpeurs et canyoneurs?","Dans quel état des Etats-Unis se trouve cette falaise?","Quel est le nom de ces gorges Aveyronaises,  où on peut grimper L'arête ouest sur la roche décollée, ou Les femmes et les grimpeurs d'abord, qui finit sous le vase de chine?","Quel est ce site proche de sisteron?","Quel est ce site situé au coeur des écrins où se rassemblent chaque année des centaines de grimpeurs ?","Quel est ce massif catalan?","Dans quel pays se situent les magnifiques Gorges de Todra?","Dans que pays se situent ces falaises?","Dans quel pays se situe ce toit mythique?","Qui au caf, en plus de grimper au club, est aussi moniteur de tennis?","Qui au caf s'occupe de l'école d'aventure?","Qui au caf a déjà oublié son enfant à la salle?","Qui au caf travaille aux caisses de la Sambuy? (1 prénom)","Quelle grimpeuse du caf est tombé dans une crevasse?","Qui au caf fait du saucisson?","Qui au caf encadre les cours du jeudi?","Qui au caf a ouvert la variante vert-marbré dans le toit?","Qui a ouvert le plus de voies dans la salle cette année?","Qui au caf ","Qui a la corde la plus vieille du club et a imprimé sa photo de licence sur une feuille quadrillée?","Qui au caf a les pantalons les plus bariolés?","Qui au caf a déjà atteri dans un arbre en parapente?","Qui au caf passe toutes ses journées de beau temps à voler à Planfait?","Qui au caf est la référence incontestée de la bière Belge?","Qui au caf a ouvert le plus de voies en extérieur?","Qui au caf ne dormira pas jusqu'à ce qu'elle réussisse la 7b beige?","Qui a ouvert des voies à la Sambuy?","Qui au caf ","Qui au caf etait père d'accueil de Roxanna, une étudiante d'Uruguay?","Qui au caf fait de la plongée en club?","Qui au club est Kiné à Giez et assure toujours avec des gants?","Qui au caf est responsable bénévole de l'école d'escalade?","Quelle famille du caf fait beaucoup de spéléo?","Qui au caf ","Qui au caf a ouvert la voie la plus dure, non libérée à ce jour?","Qui au caf est prof de sport, grimpe avec des chaussettes, et assure avec un 8?","Qui au caf était cycliste de haut niveau?","Qui au caf grimpe toujours avec ses chaussons ouverts, même dans du 6c?","Qui au caf donne les cours pratiques de nivologie?","Qui au caf est aussi accompagnateur de moyenne montagne?","Qui au caf vient d'arriver dans la région et dirige l'espace de co-working La Clé ?","Qui au caf passe plus de temps à brosser les prises qu'à grimper?","Qui au caf a une photo ronde sur sa licence?","Qui au caf anime des ateliers de playfight ?","Qui au caf se fait surnommer El Poussino ? ","Qui au caf tricote des éponges ?","Qui au caf met de l'exotisme dans les séances d'escalade ?"
     ];
 
 var answers = [
-    "ADAM ONDRA",
-    "ALEX HONNOLD",
-    "CHRIS SHARMA",
-    "JULIE",
-    "CHAISE",
-    "CHAISE DOUBLE",
-    "CABESTAN",
-    "AILEFROIDE",
-    "BAVELLA",
-    "MONT BLANC",
-    "CAF",
-    "CAF",
-    "CAF",
+    "ALEX HONNOLD","TOMMY CALDWELL","ADAM ONDRA","STEPHANIE BODET","PATRICK EDLINGER","CHRIS SHARMA","ARNAUD PETIT","ASHIMA SHIRAISHI","MARGO HAYES","LYNN HILL","CATHERINE DESTIVELLE","NINA CAPREZ","FRISON ROCHE","EMMANUEL CAUCHY","HUIT","CHAISE","CABESTAN","DEMI CABESTAN","PECHEUR DOUBLE","PAPILLON","MACHARD","FRANÇAIS","BICÉPHALE","SAMBUY","TOURNETTE","ARCLOSAN","CHARVIN","MONT BLANC","EVEREST","PIERRA MENTA","FITZROY","BAVELLA","CERVIN","AIGUILLE","GRANDES JORASSES","MIDI","MOUCHE","ARAVIS","DOLOMITES","PERCÉE","MIDI","CEUSE","LANFON","VERDON","CALANQUES","BUOUX","FONTAINEBLEAU","RODELLAR","UTAH","JONTE","ORPIERRE","AILEFROIDE","MONTSERRAT","MAROC","MADAGASCAR","AUSTRALIE","THÉO","BENOIT","GUILLAUME","PERNELLE","CHRISTINE","VINCENT","JELENA","CLAIRE","MATTHIEU","CLAUDIUS","BENOIT","ERIC","HENRI","DENIS","LUDIVINE","RAPH","JULIE","PATRICK","PIERRE-ALEXANDRE","JEREMY","JEREMY ET BENOIT","ANNE","ERWAN","REMI","LIONEL","SEBASTIEN","PIERRE","MARYLINE","YANNICK","ROLLAND","CHRISTOPHE","CLAIRE","JULES","OLIVIER","MARGOT","FRED","NICOLAS","PABLO"
     ];
 
 var images = [
-    "ondra.jpg",
-    "honnold.jpg",
-    "sharma.jpg",
-    "julie.jpg",
-    "chaise.jpg",
-    "chaise_double.jpg",
-    "cabestan.jpg",
-    "ailefroide.jpg",
-    "bavella.jpg",
-    "blanc.jpg",
-    "",
-    "",
-    "",
+    "honnold.jpg","caldwell.jpg","ondra.jpg","bodet.jpg","edlinger.jpg","sharma.jpg","petit.jpg","ashima.jpg","hayes.jpg","hill.jpg","destivelle.jpg","caprez.jpg","","","","chaise.jpg","cabestan.jpg","","","","","","","sambuy.jpg","tournette.jpg","arclosan.jpg","charvin.jpg","blanc.jpg","everest.jpg","pierramenta.jpg","fitzroy.jpg","bavella.jpg","cervin.jpg","montaiguille.jpg","jorasses.jpg","aiguille.jpg","mouche.jpg","aravis.jpg","dolomites.jpg","percee.jpg","midi.jpg","ceuse.jpg","lanfon.jpg","verdon.jpg","calanques.jpg","buoux.jpg","fontainebleau.jpg","rodellar.jpg","utah.jpg","jonte.jpg","orpierre.jpg","utah.jpg","montserrat.jpg","maroc.jpg","madagascar.jpg","australie.jpg","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
     ];
 
 var categories = [
-    "People",
-    "People",
-    "People",
-    "People",
-    "Noeuds",
-    "Noeuds",
-    "Noeuds",
-    "Sites et montagnes",
-    "Sites et montagnes",
-    "Sites et montagnes",
-    "Les amis du CAF",
-    "Les amis du CAF",
-    "Les amis du CAF",
+    "People","People","People","People","People","People","People","People","People","People","People","People","People","People","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Noeuds","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Sites et montagnes","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF","Les amis du CAF"
     ];
 
 
@@ -113,7 +65,6 @@ var team_name = "";
 
 function test(){
     console.log(input);
-    alert(ALL_QUESTIONS);
 };
 
 function write_scores(){
