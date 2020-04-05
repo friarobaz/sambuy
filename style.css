@@ -67,7 +67,6 @@ a:visited{
     flex: 1;
     align-items: flex-end;
     padding-bottom: 10px;
-    min-width: 100px;
 }
 
 #question {
