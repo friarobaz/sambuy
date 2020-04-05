@@ -64,10 +64,9 @@ a:visited{
 #question_box {
     display: flex;
     max-width: 800px;
-    flex: 1;
+    min-height: 200px;
     align-items: flex-end;
     padding-bottom: 10px;
-    min-width: 100px;
 }
 
 #question {
@@ -83,7 +82,6 @@ a:visited{
     justify-content: center;
     position: relative;
     min-width: 900px;
-    flex: 1;
 }
 
 #bravo{
@@ -165,11 +163,10 @@ a:visited{
 }
 
 footer {
-    flex: 1;
     padding-top: 5px;
 }
 
-/*
+
 div {
     border: 1px solid red;
 }
