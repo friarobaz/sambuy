@@ -1,4 +1,4 @@
-var WINS_MAX = 20
+var WINS_MAX = 10
 var wins_max_adjusted = WINS_MAX
 $("#WINS_MAX").text(WINS_MAX)
 var FADE_TIME = 5
